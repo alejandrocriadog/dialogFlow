@@ -7,12 +7,27 @@
     {
         $requestBody = file_get_contents('php://input');
         $json = json_decode($requestBody);
+        var_dump($json);
 
         $text = $json->queryResult->parameters->any;
 
+        switch($text) {
+            case 'Adios':
+                $speech = "Adios, encantado!";
+                break;
+
+            case 'Hasta luego':
+                $speech = "Hasta luego!";
+                break;
+
+            default: 
+                $speech = "Lo siento no te he entendido!";
+                break;
+        }
+
         $response = new \stdClass();
-        $response->speech = "";
-        $response->displayText = "";
+        $response->speech = $speech;
+        $response->displayText = $speech;
         $response->source = "webhook";
         echo json_encode($response);
     }
