@@ -7,7 +7,6 @@
     {
         $requestBody = file_get_contents('php://input');
         $json = json_decode($requestBody);
-        var_dump($json);
 
         $text = $json->queryResult->parameters->any;
 
